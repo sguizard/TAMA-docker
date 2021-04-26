@@ -51,8 +51,7 @@ WORKDIR $APPS_HOME
 RUN git clone $APP_GIT
 WORKDIR $APP_NAME
 RUN git checkout $APP_COMMIT
-RUN DOS_FILES=`find $APP_NAME -type f|grep -v '\.git'|grep -v 'images'`
-RUN for i in $DOS_FILES; do dos2unix $i; done
+RUN for i in $(find $APP_NAME -type f|grep -v '\.git'|grep -v 'images'); do dos2unix $i; done
 
 WORKDIR /usr/local/bin
 RUN ln -s $APP_NAME/tama_collapse.py
